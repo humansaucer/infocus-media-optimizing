@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Image from "next/image";
 
 const data = [
   { image: "/assets/Team/image-4.png", occupation: "Founder & CEO", name: "Hassan Mohammad Al Najjar" },
@@ -96,7 +97,9 @@ const TeamSection = () => {
                           }`}
                         ></div>
                       )}
-                      <img
+                      <Image
+                        width={500}
+                        height={500}
                         src={item.image}
                         alt={item.name}
                         onLoad={() => handleImageLoad(item.originalIndex)}
