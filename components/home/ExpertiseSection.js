@@ -46,6 +46,7 @@ const ExpertiseSection = () => {
                   autoPlay
                   muted
                   playsInline
+                  preload="auto"
                 />
               </div>
             )

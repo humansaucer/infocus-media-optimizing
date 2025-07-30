@@ -127,6 +127,7 @@ const TopSection = () => {
           <video
             ref={videoRef}
             src="/final2.mp4"
+            poster="/main.png"
             className="absolute inset-0 w-full h-full object-cover"
             muted
             playsInline
@@ -169,11 +170,7 @@ const TopSection = () => {
           </div>
           
           {/* Loading indicator */}
-        {!isVideoLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white text-black z-20">
-            <div className=" text-lg">Loading...</div>
-          </div>
-        )}
+        
       </section>
     </div>
   );

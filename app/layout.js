@@ -22,6 +22,30 @@ export default function RootLayout({ children }) {
         <meta property="og:image" content="/logo.png" />
         <meta property="og:type" content="website" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+        <link
+          rel="preload"
+          as="video"
+          href="/final2.mp4"
+          type="video/mp4"
+        />
+
+
+        <link
+          rel="preload"
+          as="video"
+          href="/media-hero.mp4"
+          type="video/mp4"
+        />
+
+        <link
+          rel="preload"
+          as="video"
+          href="/Blob.mp4"
+          type="video/mp4"
+        />
+
       </head>
       <body className={`relative`}>
         {/* 👇 Fixed background layer for mix-blend-difference to work */}
