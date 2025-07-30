@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import CaseStudies from "../CaseStudies";
 import ExpertiseSection from "../ExpertiseSection";
+import Image from "next/image";
 
 const SheikhCaseStudiesContainer = () => {
   const [currentWord, setCurrentWord] = useState(0);
@@ -48,7 +49,9 @@ const SheikhCaseStudiesContainer = () => {
         <div className="w-full h-full flex flex-col-reverse lg:flex-row lg:items-center gap-10 bg-white">
           {/* Image Container */}
           <div className="w-full md:w-2/3 h-[50vh] md:h-[65vh] lg:h-full">
-            <img
+            <Image
+              width={500}
+              height={500}
               src="/assets/portrait.png"
               alt="Portrait"
               className="w-full h-full object-cover"

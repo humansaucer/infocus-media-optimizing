@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Location = () => {
   return (
@@ -73,7 +74,9 @@ const Location = () => {
           <div className="font-semibold text-black text-base md:text-xl">(04) 3300 409</div>
         </div>
         <a href="https://maps.app.goo.gl/cWRBwXFomTUYaeYs9" target="_blank" rel="noopener noreferrer">
-          <img src="/map_home.png" className="w-full h-[40vh] md:h-[50vh] lg:h-[80vh] object-cover" alt="map" />
+          <Image width={500}
+          height={500} src="/map_home.png" className="w-full h-[40vh] md:h-[50vh] lg:h-[80vh] object-cover" alt="map" />
+          
         </a>
       </div>
       

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 const WorkSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -57,7 +58,9 @@ const WorkSection = () => {
                 ${hoveredIndex !== null && hoveredIndex !== index ? "opacity-30" : "opacity-100"}
               `}
             >
-              <img src={service.icon} alt={service.title} className="w-[80px] h-[80px] md:w-[96px] md:h-[96px] lg:w-[110px] lg:h-[110px] hover:scale-130 duration-300 transition-transform mb-4" />
+              <Image width={500}
+              height={500} src={service.icon} alt={service.title} className="w-[80px] h-[80px] md:w-[96px] md:h-[96px] lg:w-[110px] lg:h-[110px] hover:scale-130 duration-300 transition-transform mb-4" />
+              
               <h3 className="font-bold text-left  text-black mb-3 mt-2 text-[16px] md:text-[18px] lg:text-[22px] pr-8 leading-[.95] sub-heading tracking-wide">
                 {service.title}
               </h3>
