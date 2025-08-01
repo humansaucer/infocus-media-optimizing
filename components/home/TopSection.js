@@ -126,7 +126,7 @@ const TopSection = () => {
           >
           <video
             ref={videoRef}
-            src="/final2.mp4"
+            src="/hero-img.mp4"
             poster="/main.png"
             className="absolute inset-0 w-full h-full object-cover"
             muted

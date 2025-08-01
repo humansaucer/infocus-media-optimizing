@@ -97,6 +97,7 @@ tl.to({}, { duration: 0.6 }) // Hold time
       <video
         ref={videoRef}
         src="/Blob.mp4"
+        poster="/blob-poster.png"
         className="absolute inset-0 w-full h-full object-cover"
         muted
         playsInline
