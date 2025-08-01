@@ -55,6 +55,7 @@ const CaseStudyDetail = () => {
             alt={selected.title}
             width={1920}
             height={800}
+            
             className="rounded w-full h-auto"
           />
         </div>
@@ -89,6 +90,7 @@ const CaseStudyDetail = () => {
                   <Image 
                     src={item.image} 
                     alt={item.title} 
+                    
                     width={568} 
                     height={402} 
                     className="w-full h-[250px] sm:h-[300px] lg:h-[402px] object-cover transition-all duration-300 group-hover:blur-sm" 
@@ -114,12 +116,12 @@ const CaseStudyDetail = () => {
           </div>
           
           <div className="text-center mb-8">
-            <button
+            <Link href="/case-studies"
               className="bg-black text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded hover:bg-gray-100 hover:text-black hover:scale-105 transition-transform duration-300 font-medium text-base sm:text-lg lg:text-xl cursor-pointer"
-              onClick={() => router.push("/case-studies")}
+              
             >
               See All
-            </button>
+            </Link>
           </div>
         </div>
       </div>

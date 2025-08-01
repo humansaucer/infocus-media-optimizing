@@ -68,14 +68,14 @@ const CaseStudies = () => {
                   className="w-full h-[242px] md:h-[487px] lg:h-[620px] object-cover transition-all duration-300 group-hover:blur-sm"
                 />
                 {/* Hover Button */}
-                <button
-                  onClick={() => router.push(`/case-studies/${item._id}`)}
+                <Link href={`/case-studies/${item._id}`}
+                  
                   className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer"
                 >
                   <span className="bg-white text-black px-4 py-2 text-[16px] md:text-[18px] lg:text-[22px] font-medium rounded shadow-md">
                     Read
                   </span>
-                </button>
+                </Link>
               </div>
 
               {/* Title and Description */}

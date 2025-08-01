@@ -322,6 +322,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       if(pathname === "/team" || pathname === "/what-we-do") {
+        setLogoWhite(true);
         if(window.scrollY < 10) {
           setLogoWhite(true);
         } else {
