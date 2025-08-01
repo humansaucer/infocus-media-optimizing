@@ -38,7 +38,7 @@ export default function Home() {
         <TopSection/>
         <WorkSection/>
         <SpotLightClients/>
-        <ExpertiseSection/>    
+        {/* <ExpertiseSection/>     */}
         <SheikhCaseStudiesContainer />
         <TransformGlobe/>    
         <TeamSection/>

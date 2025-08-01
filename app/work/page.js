@@ -19,7 +19,7 @@ const Page = () => {
   
   return (
     <div className='flex flex-col px-6 pt-10'>
-      <p className='py-20 text-center text-[40px] md:text-[64px] lg:text-[64px] font-bold'>Our Works</p>
+      <p className='py-20 text-center text-[40px] md:text-[64px] lg:text-[64px] font-bold'>Our Work</p>
 
       {/* Tabs */}
       <div className='flex flex-col lg:flex-row items-center mb-3 sm:hidden'>

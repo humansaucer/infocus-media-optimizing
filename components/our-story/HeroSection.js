@@ -49,7 +49,6 @@ const HeroSection = () => {
             className="mt-4 max-w-3xl text-[18px] md:text-[20px] lg:text-[22px]"
           >
             This commitment inspires us to unite with a vibrant,
-            
           </p>
           <p
             data-bg="dark"
@@ -72,68 +71,75 @@ const HeroSection = () => {
         <img
           src="/story-img1.png"
           alt="Green Blob"
-          className="absolute bottom-0 left-0 w-full h-1/2 md:h-full md:pt-10 object-cover z-0 md:top-auto" 
+          className="absolute bottom-0 left-0 w-full h-1/2 md:h-full md:pt-10 object-cover z-0 md:top-auto"
         />
 
-        {/* Left Stats */}
-        <div className="absolute top-[-10px] left-0 z-10 w-full md:w-1/3 pl-6 lg:pl-20 sm:pl-[20px] flex flex-col lg:flex-row lg:items-center items-start justify-between gap-6">
-          <div className="flex flex-col ">
-            <h1 data-bg="dark" className="text-[54px] md:text-[84px] lg:text-[100px] font-bold">
-              <CountUp end={10} duration={3} />+
-            </h1>
-            <h2
-              data-bg="dark"
-              className="text-[16px] md:text-[18px] lg:text-[22px] text-left uppercase sub-heading"
-            >
-              Years of Experience
-            </h2>
+        <div className="relative w-full flex items-center justify-between">
+          {/* Left Stats */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 z-10 w-full md:w-2/5 pl-6 lg:pl-20 sm:pl-[20px] flex flex-col lg:flex-row lg:items-center items-start justify-between gap-6">
+            <div className="flex flex-col">
+              <h1
+                data-bg="dark"
+                className="text-[54px] md:text-[74px] lg:text-[90px] font-bold"
+              >
+                <CountUp end={10} duration={3} />+
+              </h1>
+              <h2
+                data-bg="dark"
+                className="text-[16px] md:text-[18px] lg:text-[22px] text-left uppercase sub-heading"
+              >
+                Years of Experience
+              </h2>
+            </div>
+            <div data-bg="dark" className="flex flex-col">
+              <h1
+                data-bg="dark"
+                className="text-[54px] md:text-[74px] lg:text-[90px] font-bold"
+              >
+                <CountUp end={75} duration={3} />+
+              </h1>
+              <h2
+                data-bg="dark"
+                className="text-[16px] md:text-[18px] lg:text-[22px] text-left uppercase sub-heading"
+              >
+                Clients
+              </h2>
+            </div>
           </div>
-          <div
-            data-bg="dark"
-            className="flex flex-col"
-          >
-            <h1 data-bg="dark" className="text-[54px] md:text-[84px] lg:text-[100px] font-bold">
-              <CountUp end={75} duration={3} />+
-            </h1>
-            <h2
-              data-bg="dark"
-              className="text-[16px] md:text-[18px] lg:text-[22px] text-left uppercase sub-heading"
-            >
-              Clients
-            </h2>
-          </div>
-        </div>
 
-        {/* Right Stats */}
-        <div className="absolute top-[-10px] md:right-2 z-10 w-full md:w-1/3 lg:pr-20 pr-[20px] sm:pr-20 flex flex-col lg:flex-row lg:items-center items-end justify-between gap-6">
-          <div
-            data-bg="dark"
-            className="flex flex-col items-right"
-          >
-            <h1 data-bg="dark" className="text-[54px] md:text-[84px] lg:text-[100px] font-bold">
-              <CountUp end={80} duration={3} />+
-            </h1>
-            <h2
-              data-bg="dark"
-              className="text-[16px] md:text-[18px] lg:text-[22px] text-right uppercase sub-heading"
-            >
-              Employees
-            </h2>
+          {/* Right Stats */}
+          <div className="absolute top-1/2  -translate-y-1/2 right-0 z-10 w-full md:w-2/5 lg:pr-20 pr-[20px] sm:pr-20 flex flex-col lg:flex-row lg:items-center items-end justify-between gap-6">
+            <div data-bg="dark" className="flex flex-col items-end">
+              <h1
+                data-bg="dark"
+                className="text-[54px] md:text-[74px] lg:text-[90px] font-bold"
+              >
+                <CountUp end={80} duration={3} />+
+              </h1>
+              <h2
+                data-bg="dark"
+                className="text-[16px] md:text-[18px] lg:text-[22px] text-right uppercase sub-heading"
+              >
+                Employees
+              </h2>
+            </div>
+            <div data-bg="dark" className="flex flex-col items-end">
+              <h1
+                data-bg="dark"
+                className="text-[54px] md:text-[74px] lg:text-[90px] font-bold"
+              >
+                <CountUp end={3000} duration={3} separator="" />+
+              </h1>
+              <h2
+                data-bg="dark"
+                className="text-[16px] md:text-[18px] lg:text-[22px] uppercase text-right sub-heading"
+              >
+                Projects
+              </h2>
+            </div>
           </div>
-          <div
-            data-bg="dark"
-            className="flex flex-col items-right "
-          >
-            <h1 data-bg="dark" className="text-[54px] md:text-[84px] lg:text-[100px] font-bold">
-              <CountUp end={3000} duration={3} separator="" />+
-            </h1>
-            <h2
-              data-bg="dark"
-              className="text-[16px] md:text-[18px] lg:text-[22px] uppercase text-right sub-heading"
-            >
-              Projects
-            </h2>
-          </div>
+
+
         </div>
       </div>
     </div>

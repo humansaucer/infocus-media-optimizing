@@ -40,7 +40,7 @@ const Location = () => {
 
         <div className="text-[22px] lg:w-[728] leading-relaxed mb-10 mt-20 md:mt-0">
           <p
-            className=" pl-2 sm:pl-4 md:pl-8 lg:pl-10 text-base sm:text-lg md:text-xl lg:text-2xl font-bold uppercase break-words w-full max-w-full xs:px-2 xs:w-full xs:max-w-full"
+            className=" pl-2 sm:pl-4 md:pl-8 lg:pl-10 text-base md:text-lg  font-bold uppercase break-words w-full max-w-full xs:px-2 xs:w-full xs:max-w-full"
             style={{
               fontFamily: 'Almarai, sans-serif',
               fontWeight: 700,
@@ -68,9 +68,9 @@ const Location = () => {
       <div className="flex-1 w-full lg:w-1/2 relative overflow-hidden h-[60vh] md:h-[50vh] lg:h-[80vh]">
         {/* Address Overlay */}
         <div className="absolute top-2 left-2 md:top-4 md:left-4 md:translate-x-0 bg-white p-3 md:p-8  max-w-[568px] md:w-[500px] z-10 m-5 sub-heading">
-          <div className="font-semibold text-gray-500 text-base md:text-xl uppercase mb-3 md:mb-4 tracking-wide">ADDRESS</div>
-          <div className="font-black font-semibold text-black text-lg md:text-2xl uppercase leading-tight mb-2">OFFICE 221, AL HANNA CENTER,<br/>DUBAI, UAE</div>
-          <div className="font-semibold text-black text-base md:text-xl">(04) 3300 409</div>
+          <div className="font-semibold text-gray-500 text-base md:text-lg uppercase mb-3 md:mb-4 tracking-wide">ADDRESS</div>
+          <div className="font-black font-semibold text-black text-normal md:text-xl uppercase leading-tight mb-2">OFFICE 221, AL HANNA CENTER,<br/>DUBAI, UAE</div>
+          <div className="font-semibold text-black text-base md:text-lg">(04) 3300 409</div>
         </div>
         
         <a href="https://maps.app.goo.gl/cWRBwXFomTUYaeYs9" target="_blank" rel="noopener noreferrer">

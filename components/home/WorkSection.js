@@ -59,7 +59,7 @@ const WorkSection = () => {
               `}
             >
               <Image width={500}
-              height={500} src={service.icon} alt={service.title} className="w-[80px] h-[80px] md:w-[96px] md:h-[96px] lg:w-[110px] lg:h-[110px] hover:scale-130 duration-300 transition-transform mb-4" />
+              height={500} src={service.icon} alt={service.title} className="w-[70px] h-[70px] md:w-[76px] md:h-[76px] lg:w-[90px] lg:h-[90px] hover:scale-130 duration-300 transition-transform mb-4" />
               
               <h3 className="font-bold text-left  text-black mb-3 mt-2 text-[16px] md:text-[18px] lg:text-[22px] pr-8 leading-[.95] sub-heading tracking-wide">
                 {service.title}

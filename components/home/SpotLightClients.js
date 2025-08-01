@@ -97,10 +97,10 @@ const SpotLightClients = () => {
         </div>
 
         <ClientRow clients={row1} reverse={false} duration={12} />
-        <div className='bg-gray-200 w-full h-[1px]'></div>
-        <ClientRow clients={row2} reverse={true} duration={10} />
-        <div className='bg-gray-200 w-full h-[1px]'></div>
-        <ClientRow clients={row3} reverse={false} duration={8} />
+        {/* <div className='bg-gray-200 w-full h-[1px]'></div> */}
+        {/* <ClientRow clients={row2} reverse={true} duration={10} /> */}
+        {/* <div className='bg-gray-200 w-full h-[1px]'></div> */}
+        {/* <ClientRow clients={row3} reverse={false} duration={8} /> */}
 
         <div className="text-center mt-10">
           <Link href="/clients" className='bg-black text-white px-6 py-3 cursor-pointer hover:bg-gray-200 hover:text-black hover:scale-105 transition-transform duration-300 rounded-md font-medium text-[16px] md:text-[18px] lg:text-[22px]'>
