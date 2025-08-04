@@ -1,3 +1,5 @@
+"use client"
+
 import HeroSection from '@/components/careers/HeroSection'
 import Map from '@/components/careers/Map'
 import VacanciesSection from '@/components/careers/VacanciesSection'

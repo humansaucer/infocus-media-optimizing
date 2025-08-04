@@ -67,12 +67,12 @@ const Page = () => {
         >
           Social Media
         </button>
-        <button
+        {/* <button
           onClick={() => setActiveTab("Animation")}
           className={`cursor-pointer font-bold rounded-md text-[16px] md:text-[18px] lg:text-[22px] px-4 py-2 hover:bg-black hover:text-white ${activeTab === "Animation" ? "bg-black text-white" : "text-gray-700 bg-gray-200"}`}
         >
           Animation
-        </button>
+        </button> */}
 
         <button
           onClick={() => setActiveTab("Event Coverage")}
