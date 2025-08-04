@@ -59,7 +59,7 @@ const SheikhCaseStudiesContainer = () => {
           </div>
 
           {/* Text Container */}
-          <div className="w-full lg:w-1/2 text-black lg:items-center font-bandeins-strange px-2 flex text-left sm:text-left md:text-left lg:text-left text-[40px] md:text-[54px] lg:text-[100px] leading-[.99]">
+          <div className="w-full lg:w-1/2 text-black lg:items-center font-bandeins-strange px-2 flex text-left sm:text-left md:text-left lg:text-left text-[40px] md:text-[54px] lg:text-[80px] leading-[.99]">
             <div className="flex flex-col gap-0">
               <h1 className="text-green-500 font-bold md:ml-[-230px] lg:ml-0">"</h1>
               <h1 className="font-bold">The future</h1>

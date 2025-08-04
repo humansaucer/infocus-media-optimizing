@@ -19,9 +19,9 @@
 html {
   font-family: 'Bandeins Strange Variable', sans-serif;
 }
-html {
+/* html {
   scroll-behavior: smooth;
-}
+} */
 /* html, body {
   height: 100%;
   overflow-x: hidden;

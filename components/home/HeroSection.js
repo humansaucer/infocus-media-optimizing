@@ -282,7 +282,7 @@ export default function HeroSection() {
       </div>
 
       {/* Medium screens and below - fallback */}
-      <div className="lg:hidden">
+      {/* <div className="lg:hidden">
         <div className="h-screen relative">
           <div className="absolute inset-0 z-10">
             <div className="sticky top-0 h-screen">
@@ -331,7 +331,7 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
