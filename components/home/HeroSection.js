@@ -40,7 +40,12 @@ export default function HeroSection() {
       const contentOverlay = contentOverlayRef.current;
 
       gsap.set(text, { attr: { x: startX } });
-      gsap.set(video, { y: 0 }); // Initial position
+      gsap.set(video, { 
+        y: 0,
+        height: "100vh",
+        width: "100vw",
+        objectFit: "cover"
+      });
       
       // Hide content initially and position it
       if (logo) gsap.set(logo, { opacity: 0, y: 50 });
@@ -55,7 +60,8 @@ export default function HeroSection() {
           top: 0,
           left: 0,
           right: 0,
-          bottom: 0
+          bottom: 0,
+          height: "100vh"
         });
       }
 
@@ -63,24 +69,30 @@ export default function HeroSection() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=4000",
+          end: "+=5000",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
         },
       });
 
-      // Text animation (first 70%)
+      // Text animation (first 50% of timeline)
       tl.to(text, {
         attr: { x: endX },
         ease: "power1.out",
-        duration: 0.7
+        duration: 0.5
       })
-      // Video and content overlay animation (next 20%)
+      // Fade out the white mask to reveal video movement (next 10%)
+      .to(".text-mask-rect", {
+        opacity: 0,
+        ease: "power2.out",
+        duration: 0.1
+      })
+      // Move video and content overlay down below h-screen (next 30%)
       .to([video, contentOverlay], {
-        y: "100vh",
-        ease: "power1.out",
-        duration: 0.2
+        y: "100vh", // Move video down by full viewport height
+        ease: "power2.out",
+        duration: 0.3
       })
       // Content fade in animation (last 10%)
       .to(logo, {
@@ -182,12 +194,12 @@ export default function HeroSection() {
     <div
       ref={sectionRef}
       className="relative w-screen overflow-hidden"
-      style={{ height: '200vh' }} // Make container taller to accommodate video movement
+      style={{ height: '200vh' }} // Container needs to be tall enough for video movement
     >
-      {/* Single Video Element - Used for all screen sizes */}
+      {/* Single Video Element - Fixed sizing to prevent stretching */}
       <video
         ref={videoRef}
-        className="absolute inset-0 z-0 w-full h-full object-cover"
+        className="absolute inset-0 z-0 w-screen h-screen object-cover"
         src="/media-hero.mp4"
         autoPlay
         loop
@@ -195,17 +207,28 @@ export default function HeroSection() {
         playsInline
         preload="auto"
         onLoadedData={handleVideoLoad}
+        style={{ 
+          minWidth: '100vw',
+          minHeight: '100vh',
+          maxWidth: '100vw',
+          maxHeight: '100vh'
+        }}
       />
 
-      {/* Content overlay - moves with video and shows below h-screen */}
-      <div className="content-overlay top-180 absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-4 pointer-events-none">
+      {/* Content overlay - moves with video and centers in new position */}
+      <div 
+        ref={contentOverlayRef}
+        className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-4 pointer-events-none h-screen"
+      >
+        <div className="w-full absolute inset-0 h-full"></div>
+        
         <img
           src="/logo.png"
           alt="Logo"
           className="logo-fade w-3/4 max-w-[580px] max-h-[68px] mb-6 object-contain"
         />
         <p
-          className="text-fade uppercase text-black text-[15px] md:text-[18px] lg:text-[22px] mb-1"
+          className="text-fade uppercase text-white text-[15px] md:text-[18px] lg:text-[22px] mb-1"
           style={{
             fontFamily: "'Almarai', sans-serif",
             fontWeight: 600,
@@ -216,7 +239,7 @@ export default function HeroSection() {
           Born from Emirati soil, our roots run deep
         </p>
         <p
-          className="text-fade uppercase text-black text-[16px] md:text-[18px] lg:text-[22px]"
+          className="text-fade uppercase text-white text-[16px] md:text-[18px] lg:text-[22px]"
           style={{
             fontFamily: "'Almarai', sans-serif",
             fontWeight: 600,
@@ -274,6 +297,7 @@ export default function HeroSection() {
                   height="100%"
                   fill="white"
                   mask="url(#text-mask)"
+                  className="text-mask-rect"
                 />
               </svg>
             </div>
@@ -281,57 +305,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Medium screens and below - fallback */}
-      {/* <div className="lg:hidden">
-        <div className="h-screen relative">
-          <div className="absolute inset-0 z-10">
-            <div className="sticky top-0 h-screen">
-              <svg
-                className="absolute inset-0 pointer-events-none"
-                width="100%"
-                height="100%"
-              >
-                <defs>
-                  <mask
-                    id="text-mask-mobile"
-                    x="0"
-                    y="0"
-                    width="100%"
-                    height="100%"
-                    maskUnits="userSpaceOnUse"
-                  >
-                    <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                    <text
-                      x="0"
-                      y="60%"
-                      dominantBaseline="middle"
-                      fontSize="54vw"
-                      textAnchor="start"
-                      fontWeight="bold"
-                      fontFamily="inherit"
-                      fill="black"
-                      className="whitespace-nowrap"
-                    >
-                      Infocus Media
-                      <tspan fontSize="20vw" dy="-0.65em">
-                        ®
-                      </tspan>
-                    </text>
-                  </mask>
-                </defs>
-                <rect
-                  x="0"
-                  y="0"
-                  width="100%"
-                  height="100%"
-                  fill="white"
-                  mask="url(#text-mask-mobile)"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      
     </div>
   );
 }
