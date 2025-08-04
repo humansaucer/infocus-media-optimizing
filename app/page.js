@@ -27,32 +27,30 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  
   useEffect(() => {
-  const lenis = new Lenis({
-    duration: 0.6, // Very short
-    easing: (t) => 1 - Math.pow(1 - t, 3), // easeOutCubic - quick stop
-    smooth: true,
-    smoothTouch: false,
-    infinite: false,
-    gestureDirection: 'vertical',
-    wheelMultiplier: 0.8, // Reduce wheel sensitivity
-    touchMultiplier: 1.0,
-  });
-  
-  let frame;
-  const raf = (time) => {
-    lenis.raf(time);
-    frame = requestAnimationFrame(raf);
-  };
-  frame = requestAnimationFrame(raf);
-  
-  return () => {
-    cancelAnimationFrame(frame);
-    lenis.destroy();
-  };
-}, []);
+    const lenis = new Lenis({
+      duration: 0.6, // Very short
+      easing: (t) => 1 - Math.pow(1 - t, 3), // easeOutCubic - quick stop
+      smooth: true,
+      smoothTouch: false,
+      infinite: false,
+      gestureDirection: "vertical",
+      wheelMultiplier: 0.8, // Reduce wheel sensitivity
+      touchMultiplier: 1.0,
+    });
 
+    let frame;
+    const raf = (time) => {
+      lenis.raf(time);
+      frame = requestAnimationFrame(raf);
+    };
+    frame = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <div className="relative w-full">

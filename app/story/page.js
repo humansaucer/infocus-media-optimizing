@@ -13,19 +13,29 @@ import Lenis from "@studio-freight/lenis";
 const page = () => {
 
   useEffect(() => {
-        const lenis = new Lenis({
-          duration: 0.5, // feel free to tweak for more smoothness
-          easing: (t) => (t), // default ease
-          smooth: true,
-        });
-    
-        function raf(time) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-    
-        requestAnimationFrame(raf);
-      }, []);
+      const lenis = new Lenis({
+        duration: 0.6, // Very short
+        easing: (t) => 1 - Math.pow(1 - t, 3), // easeOutCubic - quick stop
+        smooth: true,
+        smoothTouch: false,
+        infinite: false,
+        gestureDirection: "vertical",
+        wheelMultiplier: 0.8, // Reduce wheel sensitivity
+        touchMultiplier: 1.0,
+      });
+  
+      let frame;
+      const raf = (time) => {
+        lenis.raf(time);
+        frame = requestAnimationFrame(raf);
+      };
+      frame = requestAnimationFrame(raf);
+  
+      return () => {
+        cancelAnimationFrame(frame);
+        lenis.destroy();
+      };
+    }, []);
 
   return (
     <div className="relative">
