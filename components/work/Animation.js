@@ -87,7 +87,7 @@ const Animation = () => {
               <div className="md:w-2/3 w-full">
                 {/* Carousel for screens below lg */}
                 <div className="lg:hidden">
-                  <div className="relative">
+                  <div className="relative" data-lenis-prevent>
                     <iframe
                       src={`https://player.vimeo.com/video/${item.videoLinks[getCurrentIndex(index)]?.split("/").pop()}`}
                       title={item.title || "Case Study"}
@@ -124,7 +124,7 @@ const Animation = () => {
 
                 {/* Grid for lg screens and above */}
                 <div className="hidden lg:block">
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-4" data-lenis-prevent>
                     {item.videoLinks.map((videoLink, i) => (
                       <iframe
                         key={i}

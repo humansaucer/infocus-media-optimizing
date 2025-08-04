@@ -64,7 +64,7 @@ const VideoProduction = () => {
               </div>
 
               {/* Image */}
-              <div className='w-full lg:w-2/3 h-[191px] md:h-[383px] lg:h-[750px]'>
+              <div className='w-full lg:w-2/3 h-[191px] md:h-[383px] lg:h-[750px]' data-lenis-prevent>
               <iframe
                 src={`https://player.vimeo.com/video/${item.videoLink?.split("/").pop()}`}
                 title={item.title || "Case Study"}

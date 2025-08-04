@@ -77,7 +77,7 @@ const EventCoverage = () => {
               </div>
 
               {/* Image */}
-              <div className='w-full md:w-3/4'>
+              <div className='w-full md:w-3/4' data-lenis-prevent>
               <iframe
                 src={`https://player.vimeo.com/video/${item.videoLink?.split("/").pop()}`}
                 title={item.title || "Case Study"}

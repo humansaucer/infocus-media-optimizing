@@ -43,7 +43,7 @@ const FooterGlobe = () => {
           {["let's create", "something great", "together!"].map((text, i) => (
             <h1
               key={i}
-              className={`text-[50px] md:text-[100px] font-bold transition-all duration-1000 ease-out ${
+              className={`text-[50px] md:text-[70px] lg:text-[90px] font-bold transition-all duration-1000 ease-out ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"

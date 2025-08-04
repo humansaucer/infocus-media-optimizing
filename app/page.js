@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Lenis from "@studio-freight/lenis";
 import CaseStudies from "@/components/home/CaseStudies";
 import ExpertiseSection from "@/components/home/ExpertiseSection";
 import Footer from "@/components/home/Footer";
@@ -19,50 +20,55 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Hide loader after 5 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 2.5, // feel free to tweak for more smoothness
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // default ease
+      smooth: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  }, []);
+
   return (
     <div className="relative w-full">
-      {/* Main Content */}
-      <div className={`transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+      <div
+        className={`transition-opacity duration-700 ${
+          isLoading ? "opacity-0" : "opacity-100"
+        }`}
+      >
         <div className="hidden lg:block">
-          <HeroSection/>
+          <HeroSection />
         </div>
-        <TabletSection/>
-        <TopSection/>
-        <WorkSection/>
-        <SpotLightClients/>
-        {/* <ExpertiseSection/>     */}
+        <TabletSection />
+        {/* <TopSection /> */}
+        <WorkSection />
+        <SpotLightClients />
+        {/* <ExpertiseSection />     */}
         <SheikhCaseStudiesContainer />
-        <TransformGlobe/>    
-        <TeamSection/>
-        <Location/>
-        <FooterGlobe/>
-        <Footer/>
+        <TransformGlobe />
+        <TeamSection />
+        <Location />
+        <FooterGlobe />
+        <Footer />
       </div>
 
-      {/* Simple Loader */}
+      {/* Loader */}
       {isLoading && (
         <div className="fixed inset-0 w-full h-full bg-white z-50 flex items-center justify-center">
-          <div className="text-center">
-            <img 
-              src="/logo-black.png" 
-              alt="Loading..." 
-              className="w-32 h-auto md:w-40 mx-auto mb-6 animate-pulse"
-            />
-            <p className="text-xl md:text-2xl font-semibold text-gray-800">
-              Loading
-              <span className="inline-block animate-bounce ml-1">.</span>
-              <span className="inline-block animate-bounce ml-0.5" style={{animationDelay: '0.2s'}}>.</span>
-              <span className="inline-block animate-bounce ml-0.5" style={{animationDelay: '0.4s'}}>.</span>
-            </p>
-          </div>
+          <Loader />
         </div>
       )}
     </div>

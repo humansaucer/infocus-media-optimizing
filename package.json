@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
     "@tiptap/extension-link": "^2.25.0",
     "@tiptap/extension-text-align": "^2.25.0",
     "@tiptap/react": "^2.25.0",

@@ -10,10 +10,26 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Loader from '@/components/Loader'
+import Lenis from "@studio-freight/lenis";
 
 const Page = () => {
   const [activeTab, setActiveTab] = useState("Social Media")
   
+
+  useEffect(() => {
+      const lenis = new Lenis({
+        duration: 2.5, // feel free to tweak for more smoothness
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // default ease
+        smooth: true,
+      });
+  
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+  
+      requestAnimationFrame(raf);
+    }, []);
   
 
   

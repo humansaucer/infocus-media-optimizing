@@ -34,7 +34,7 @@ const LocationSection = () => {
         </div>
       </div>
       <a href="https://maps.app.goo.gl/cWRBwXFomTUYaeYs9" target="_blank" rel="noopener noreferrer">
-        <img src="/map_home.png" className="w-full object-cover h-[70vh]" alt="map" />
+        <img src="/map_home.png" className="w-full object-cover h-[100vh]" alt="map" />
       </a>
     </div>
   )
