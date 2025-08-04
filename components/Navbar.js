@@ -12,7 +12,7 @@ const menuItems = [
   { name: "CLIENTS", href: "/clients" },
   // { name: "WHAT WE DO", href: "/what-we-do" },
   { name: "CASE STUDIES", href: "/case-studies" },
-  { name: "Our WORK", href: "/work" },
+  { name: "OUR WORK", href: "/work" },
   { name: "CAREERS", href: "/careers" },
   { name: "TEAM", href: "/team" },
   { name: "CONTACTS", href: "/contacts" },
