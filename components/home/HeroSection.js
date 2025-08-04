@@ -205,7 +205,7 @@ export default function HeroSection() {
           className="logo-fade w-3/4 max-w-[580px] max-h-[68px] mb-6 object-contain"
         />
         <p
-          className="text-fade uppercase text-white text-[15px] md:text-[18px] lg:text-[22px] mb-1"
+          className="text-fade uppercase text-black text-[15px] md:text-[18px] lg:text-[22px] mb-1"
           style={{
             fontFamily: "'Almarai', sans-serif",
             fontWeight: 600,
@@ -216,7 +216,7 @@ export default function HeroSection() {
           Born from Emirati soil, our roots run deep
         </p>
         <p
-          className="text-fade uppercase text-white text-[16px] md:text-[18px] lg:text-[22px]"
+          className="text-fade uppercase text-black text-[16px] md:text-[18px] lg:text-[22px]"
           style={{
             fontFamily: "'Almarai', sans-serif",
             fontWeight: 600,
