@@ -41,15 +41,7 @@ const Location = () => {
 
         <div className="text-[22px] lg:w-[728] leading-relaxed mb-10 mt-20 md:mt-0">
           <p
-            className=" pl-2 sm:pl-4 md:pl-8 lg:pl-10 text-base md:text-lg font-bold uppercase break-words w-full max-w-full xs:px-2 xs:w-full xs:max-w-full"
-            style={{
-              fontFamily: 'Almarai, sans-serif',
-              fontWeight: 700,
-              fontStyle: "bold",
-              lineHeight: "100%",
-              letterSpacing: "3%",
-              textTransform: "uppercase",
-            }}
+            className=" pl-2 pr-2 sm:pl-4 md:pl-8 lg:pl-10 text-base md:text-lg font-bold uppercase break-words w-full sub-heading"
           >
             We’re always on the lookout for brilliant minds and bold ideas.Check out our vacancies and apply for the one that suits you best!
              

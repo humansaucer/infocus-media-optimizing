@@ -92,7 +92,7 @@ export default function HeroSection() {
       .to([video, contentOverlay], {
         y: "100vh", // Move video down by full viewport height
         ease: "power2.out",
-        duration: 0.3
+        duration: 0.2
       })
       // Content fade in animation (last 10%)
       .to(logo, {
