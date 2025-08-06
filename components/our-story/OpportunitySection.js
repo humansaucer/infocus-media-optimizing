@@ -7,7 +7,7 @@ const OpportunitySection = () => {
       <div className="text-center leading-[.99]">
         <h1 className="text-[40px] md:text-[64px] font-bold">Unlocking opportunities</h1>
         <h1 className="text-[40px] md:text-[64px] font-bold ">
-          through strategic partnership
+          through strategic partnerships
         </h1>
       </div>
 
