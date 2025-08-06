@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import axios from "axios";
 import Loader from "../Loader";
+import Lenis from "@studio-freight/lenis";
 
 const Animation = () => {
   const ITEMS_PER_PAGE = 4;
@@ -11,6 +12,31 @@ const Animation = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState({});
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+      const lenis = new Lenis({
+        duration: 0.6, // Very short
+        easing: (t) => 1 - Math.pow(1 - t, 3), // easeOutCubic - quick stop
+        smooth: true,
+        smoothTouch: false,
+        infinite: false,
+        gestureDirection: "vertical",
+        wheelMultiplier: 0.8, // Reduce wheel sensitivity
+        touchMultiplier: 1.0,
+      });
+  
+      let frame;
+      const raf = (time) => {
+        lenis.raf(time);
+        frame = requestAnimationFrame(raf);
+      };
+      frame = requestAnimationFrame(raf);
+  
+      return () => {
+        cancelAnimationFrame(frame);
+        lenis.destroy();
+      };
+    }, []);
 
   const fetchData = async () => {
     try {

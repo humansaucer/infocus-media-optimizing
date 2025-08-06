@@ -10,6 +10,7 @@ export default function HeroSection() {
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const videoRef = useRef(null);
+  const secondVideoRef = useRef(null);
   const contentOverlayRef = useRef(null);
   const mobileTextRef = useRef(null);
   const tabletTextRef = useRef(null);
@@ -21,8 +22,9 @@ export default function HeroSection() {
     const section = sectionRef.current;
     const text = textRef.current;
     const video = videoRef.current;
+    const secondVideo = secondVideoRef.current;
 
-    if (!section || !text || !video) return;
+    if (!section || !text || !video || !secondVideo) return;
 
     // Only run GSAP on large screens
     if (window.innerWidth < 1024) return;
@@ -42,6 +44,14 @@ export default function HeroSection() {
       gsap.set(text, { attr: { x: startX } });
       gsap.set(video, { 
         y: 0,
+        height: "100vh",
+        width: "100vw",
+        objectFit: "cover"
+      });
+      
+      // Position second video initially below viewport
+      gsap.set(secondVideo, { 
+        y: "100vh",
         height: "100vh",
         width: "100vw",
         objectFit: "cover"
@@ -82,9 +92,9 @@ export default function HeroSection() {
         ease: "power1.out",
         duration: 0.7
       })
-      // At 70% completion, start moving video down (overlapping with text animation)
-      .to([video, contentOverlay], {
-        y: "100vh", // Move video down by full viewport height
+      // At 70% completion, start moving second video up from bottom (overlapping with text animation)
+      .to(secondVideo, {
+        y: 0, // Move second video up to viewport
         ease: "power2.out",
         duration: 0.3
       }, 0.7) // Start at 70% of timeline
@@ -192,9 +202,9 @@ export default function HeroSection() {
     <div
       ref={sectionRef}
       className="relative w-screen overflow-hidden"
-      style={{ height: '200vh' }} // Container height for smooth transition
+      style={{ height: '100vh' }} // Container height for smooth transition
     >
-      {/* Single Video Element - Fixed sizing to prevent stretching */}
+      {/* First Video Element - Main background video */}
       <video
         ref={videoRef}
         className="absolute inset-0 z-0 w-screen h-screen object-cover"
@@ -205,6 +215,24 @@ export default function HeroSection() {
         playsInline
         preload="auto"
         onLoadedData={handleVideoLoad}
+        style={{ 
+          minWidth: '100vw',
+          minHeight: '100vh',
+          maxWidth: '100vw',
+          maxHeight: '100vh'
+        }}
+      />
+
+      {/* Second Video Element - Animates from bottom to top */}
+      <video
+        ref={secondVideoRef}
+        className="absolute inset-0 z-5 w-screen h-screen object-cover"
+        src="/media-hero.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
         style={{ 
           minWidth: '100vw',
           minHeight: '100vh',
