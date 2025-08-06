@@ -76,38 +76,44 @@ export default function HeroSection() {
         },
       });
 
-      // Text animation (first 50% of timeline)
+      // Text animation (first 70% of timeline) - horizontal scroll
       tl.to(text, {
         attr: { x: endX },
         ease: "power1.out",
-        duration: 0.5
+        duration: 0.7
       })
-      // Fade out the white mask to reveal video movement (next 10%)
-      .to(".text-mask-rect", {
-        opacity: 0,
-        ease: "power2.out",
-        duration: 0.1
-      })
-      // Move video and content overlay down below h-screen (next 30%)
+      // At 70% completion, start moving video down (overlapping with text animation)
       .to([video, contentOverlay], {
         y: "100vh", // Move video down by full viewport height
         ease: "power2.out",
-        duration: 0.2
-      })
-      // Content fade in animation (last 10%)
+        duration: 0.3
+      }, 0.7) // Start at 70% of timeline
+      // Change text color to black when video is 50% down (at 85% of timeline)
+      .to(text, {
+        attr: { fill: "black" },
+        ease: "none",
+        duration: 0.01
+      }, 0.85) // 70% + (30% * 0.5) = 85% of timeline
+      // Fade out the white mask simultaneously with color change
+      .to(".text-mask-rect", {
+        opacity: 0,
+        ease: "power2.out",
+        duration: 0.15
+      }, 0.85) // Start when text turns black
+      // Content fade in animation (final phase)
       .to(logo, {
         opacity: 1,
         y: 0,
         ease: "power2.out",
         duration: 0.05
-      }, "+=0.05")
+      }, 0.9) // Start near end
       .to(textElements, {
         opacity: 1,
         y: 0,
         ease: "power2.out",
         duration: 0.05,
-        stagger: 0.02
-      }, "-=0.03");
+        stagger: 0.01
+      }, 0.95); // Start at very end
     });
 
     return () => {
@@ -157,14 +163,6 @@ export default function HeroSection() {
         start: "top bottom",
         end: "bottom bottom",
         scrub: 0.9,
-      
-        // onUpdate: (self) => {
-        //   const progress = self.progress;
-        //   gsap.to(textElement, {
-        //     y: progress * window.innerHeight,
-        //     duration: 0,
-        //   });
-        // }
       }
     });
 
@@ -194,7 +192,7 @@ export default function HeroSection() {
     <div
       ref={sectionRef}
       className="relative w-screen overflow-hidden"
-      style={{ height: '200vh' }} // Container needs to be tall enough for video movement
+      style={{ height: '200vh' }} // Container height for smooth transition
     >
       {/* Single Video Element - Fixed sizing to prevent stretching */}
       <video
@@ -304,8 +302,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }
