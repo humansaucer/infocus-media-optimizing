@@ -202,13 +202,13 @@ export default function HeroSection() {
     <div
       ref={sectionRef}
       className="relative w-screen overflow-hidden"
-      style={{ height: '100vh' }} // Container height for smooth transition
+      style={{ heigaht: '100vh' }} // Container height for smooth transition
     >
       {/* First Video Element - Main background video */}
       <video
         ref={videoRef}
         className="absolute inset-0 z-0 w-screen h-screen object-cover"
-        src="/media-hero.mp4"
+        src="/EditedVideos.mp4"
         autoPlay
         loop
         muted
@@ -227,7 +227,7 @@ export default function HeroSection() {
       <video
         ref={secondVideoRef}
         className="absolute inset-0 z-5 w-screen h-screen object-cover"
-        src="/media-hero.mp4"
+        src="/EditedVideos.mp4"
         autoPlay
         loop
         muted

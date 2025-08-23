@@ -32,7 +32,7 @@ const AddWorkPage = () => {
         });
         
         setTimeout(() => {
-          router.push('/work-');
+          router.push('/work-management');
         }, 1500);
       } else {
         setNotification({
@@ -53,7 +53,7 @@ const AddWorkPage = () => {
 
   const handleClose = () => {
     setIsModalOpen(false);
-    router.push('/work-');
+    router.push('/work-management');
   };
 
   return (

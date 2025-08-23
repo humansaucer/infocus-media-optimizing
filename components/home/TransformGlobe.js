@@ -94,7 +94,7 @@ tl.to({}, { duration: 0.6 }) // Hold time
       }}
     >
       {/* Video Background */}
-      <video
+      {/* <video
         ref={videoRef}
         src="/Blob.mp4"
         poster="/blob-poster.png"
@@ -107,7 +107,9 @@ tl.to({}, { duration: 0.6 }) // Hold time
           top: 0,
           left: 0
         }}
-      />
+      /> */}
+
+      <img ref={videoRef} src="/blob-poster.png" alt="Transform Globe" className="absolute inset-0 w-full h-full object-contain" />
 
       {/* Text Overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
