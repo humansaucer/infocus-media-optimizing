@@ -189,11 +189,11 @@ export default function HeroSection() {
   }
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.addEventListener('loadeddata', handleVideoLoad);
+    const iframe = videoRef.current;
+    if (iframe) {
+      iframe.addEventListener('load', handleVideoLoad);
       return () => {
-        video.removeEventListener('loadeddata', handleVideoLoad);
+        iframe.removeEventListener('load', handleVideoLoad);
       };
     }
   }, []);
@@ -202,42 +202,40 @@ export default function HeroSection() {
     <div
       ref={sectionRef}
       className="relative w-screen overflow-hidden"
-      style={{ heigaht: '100vh' }} // Container height for smooth transition
+      style={{ height: '100vh' }} // Container height for smooth transition
     >
       {/* First Video Element - Main background video */}
-      <video
+      <iframe
         ref={videoRef}
         className="absolute inset-0 z-0 w-screen h-screen object-cover"
-        src="https://trader-store.s3.eu-north-1.amazonaws.com/media/1755928062074-EditedVideos.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        onLoadedData={handleVideoLoad}
+        src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
         style={{ 
           minWidth: '100vw',
           minHeight: '100vh',
           maxWidth: '100vw',
-          maxHeight: '100vh'
+          maxHeight: '100vh',
+          border: 'none'
         }}
+        onLoad={handleVideoLoad}
       />
 
       {/* Second Video Element - Animates from bottom to top */}
-      <video
+      <iframe
         ref={secondVideoRef}
         className="absolute inset-0 z-5 w-screen h-screen object-cover"
-        src="https://trader-store.s3.eu-north-1.amazonaws.com/media/1755928062074-EditedVideos.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
+        src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
         style={{ 
           minWidth: '100vw',
           minHeight: '100vh',
           maxWidth: '100vw',
-          maxHeight: '100vh'
+          maxHeight: '100vh',
+          border: 'none'
         }}
       />
 
