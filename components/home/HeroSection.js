@@ -208,7 +208,7 @@ export default function HeroSection() {
       <video
         ref={videoRef}
         className="absolute inset-0 z-0 w-screen h-screen object-cover"
-        src="/EditedVideos.mp4"
+        src="https://trader-store.s3.eu-north-1.amazonaws.com/media/1755928062074-EditedVideos.mp4"
         autoPlay
         loop
         muted
@@ -227,7 +227,7 @@ export default function HeroSection() {
       <video
         ref={secondVideoRef}
         className="absolute inset-0 z-5 w-screen h-screen object-cover"
-        src="/EditedVideos.mp4"
+        src="https://trader-store.s3.eu-north-1.amazonaws.com/media/1755928062074-EditedVideos.mp4"
         autoPlay
         loop
         muted
