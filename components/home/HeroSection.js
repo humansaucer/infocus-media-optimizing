@@ -3,7 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Plyr from 'plyr';
+
+// Only import Plyr on client side
+let Plyr;
+if (typeof window !== "undefined") {
+  import('plyr').then((module) => {
+    Plyr = module.default;
+  });
+}
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,9 +54,9 @@ export default function HeroSection() {
       const startX = 0;
       const endX = -textWidth + viewportWidth * 0.9;
 
-      // Get content elements
-      const logo = document.querySelector(".logo-fade");
-      const textElements = document.querySelectorAll(".text-fade");
+      // Get content elements - check if document exists first
+      const logo = typeof document !== "undefined" ? document.querySelector(".logo-fade") : null;
+      const textElements = typeof document !== "undefined" ? document.querySelectorAll(".text-fade") : [];
       const contentOverlay = contentOverlayRef.current;
 
       gsap.set(text, { attr: { x: startX } });
@@ -187,7 +194,7 @@ export default function HeroSection() {
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, []);
+  }, [isClient]);
 
   // GSAP animations for mobile
   useEffect(() => {
