@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Plyr from 'plyr';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,9 +17,19 @@ export default function HeroSection() {
   const tabletTextRef = useRef(null);
   const [isHeroLoaded, setIsHeroLoaded] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [player1, setPlayer1] = useState(null);
+  const [player2, setPlayer2] = useState(null);
+
+  // Ensure we're on client side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // GSAP animations for large screens
   useEffect(() => {
+    if (!isClient) return;
+
     const section = sectionRef.current;
     const text = textRef.current;
     const video = videoRef.current;
@@ -27,7 +38,7 @@ export default function HeroSection() {
     if (!section || !text || !video || !secondVideo) return;
 
     // Only run GSAP on large screens
-    if (window.innerWidth < 1024) return;
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
 
     requestAnimationFrame(() => {
       const textWidth = text.getComputedTextLength();
@@ -37,41 +48,37 @@ export default function HeroSection() {
       const endX = -textWidth + viewportWidth * 0.9;
 
       // Get content elements
-      const logo = document.querySelector('.logo-fade');
-      const textElements = document.querySelectorAll('.text-fade');
+      const logo = document.querySelector(".logo-fade");
+      const textElements = document.querySelectorAll(".text-fade");
       const contentOverlay = contentOverlayRef.current;
 
       gsap.set(text, { attr: { x: startX } });
-      gsap.set(video, { 
+      
+      // Position video containers
+      gsap.set(video, {
         y: 0,
-        height: "100vh",
-        width: "100vw",
-        objectFit: "cover"
       });
-      
+
       // Position second video initially below viewport
-      gsap.set(secondVideo, { 
+      gsap.set(secondVideo, {
         y: "100vh",
-        height: "100vh",
-        width: "100vw",
-        objectFit: "cover"
       });
-      
+
       // Hide content initially and position it
       if (logo) gsap.set(logo, { opacity: 0, y: 50 });
       if (textElements.length) {
         gsap.set(textElements, { opacity: 0, y: 30 });
       }
       if (contentOverlay) {
-        gsap.set(contentOverlay, { 
+        gsap.set(contentOverlay, {
           y: 0,
-          display: 'flex',
-          position: 'absolute',
+          display: "flex",
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          height: "100vh"
+          height: "100vh",
         });
       }
 
@@ -90,54 +97,76 @@ export default function HeroSection() {
       tl.to(text, {
         attr: { x: endX },
         ease: "power1.out",
-        duration: 0.7
+        duration: 0.7,
       })
-      // At 70% completion, start moving second video up from bottom (overlapping with text animation)
-      .to(secondVideo, {
-        y: 0, // Move second video up to viewport
-        ease: "power2.out",
-        duration: 0.3
-      }, 0.7) // Start at 70% of timeline
-      // Change text color to black when video is 50% down (at 85% of timeline)
-      .to(text, {
-        attr: { fill: "black" },
-        ease: "none",
-        duration: 0.01
-      }, 0.85) // 70% + (30% * 0.5) = 85% of timeline
-      // Fade out the white mask simultaneously with color change
-      .to(".text-mask-rect", {
-        opacity: 0,
-        ease: "power2.out",
-        duration: 0.15
-      }, 0.85) // Start when text turns black
-      // Content fade in animation (final phase)
-      .to(logo, {
-        opacity: 1,
-        y: 0,
-        ease: "power2.out",
-        duration: 0.05
-      }, 0.9) // Start near end
-      .to(textElements, {
-        opacity: 1,
-        y: 0,
-        ease: "power2.out",
-        duration: 0.05,
-        stagger: 0.01
-      }, 0.95); // Start at very end
+        // At 70% completion, start moving second video up from bottom (overlapping with text animation)
+        .to(
+          secondVideo,
+          {
+            y: 0, // Move second video up to viewport
+            ease: "power2.out",
+            duration: 0.3,
+          },
+          0.7
+        ) // Start at 70% of timeline
+        // Change text color to black when video is 50% down (at 85% of timeline)
+        .to(
+          text,
+          {
+            attr: { fill: "black" },
+            ease: "none",
+            duration: 0.01,
+          },
+          0.85
+        ) // 70% + (30% * 0.5) = 85% of timeline
+        // Fade out the white mask simultaneously with color change
+        .to(
+          ".text-mask-rect",
+          {
+            opacity: 0,
+            ease: "power2.out",
+            duration: 0.15,
+          },
+          0.85
+        ) // Start when text turns black
+        // Content fade in animation (final phase)
+        .to(
+          logo,
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.05,
+          },
+          0.9
+        ) // Start near end
+        .to(
+          textElements,
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            duration: 0.05,
+            stagger: 0.01,
+          },
+          0.95
+        ); // Start at very end
     });
 
     return () => {
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, []);
+  }, [isClient]);
 
   // GSAP animations for tablet
   useEffect(() => {
+    if (!isClient) return;
     const container = tabletTextRef.current;
-    if (!container || window.innerWidth >= 1024 || window.innerWidth < 768) return;
+    if (!container || typeof window === 'undefined' || window.innerWidth >= 1024 || window.innerWidth < 768)
+      return;
 
-    const textElement = container.querySelector('.tablet-text');
-    
+    const textElement = container.querySelector(".tablet-text");
+
     gsap.timeline({
       scrollTrigger: {
         trigger: container,
@@ -151,112 +180,158 @@ export default function HeroSection() {
             y: progress * window.innerHeight,
             duration: 0,
           });
-        }
-      }
+        },
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
   // GSAP animations for mobile
   useEffect(() => {
+    if (!isClient) return;
     const container = mobileTextRef.current;
-    if (!container || window.innerWidth >= 768) return;
+    if (!container || typeof window === 'undefined' || window.innerWidth >= 768) return;
 
-    const textElement = container.querySelector('.mobile-text');
-    
+    const textElement = container.querySelector(".mobile-text");
+
     gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: "top bottom",
         end: "bottom bottom",
         scrub: 0.9,
-      }
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, []);
+  }, [isClient]);
 
   const handleVideoLoad = () => {
     setIsVideoLoaded(true);
     setTimeout(() => {
       setIsHeroLoaded(true);
     }, 1500);
-  }
+  };
 
+  // Initialize Vimeo player loading
   useEffect(() => {
-    const iframe = videoRef.current;
-    if (iframe) {
-      iframe.addEventListener('load', handleVideoLoad);
-      return () => {
-        iframe.removeEventListener('load', handleVideoLoad);
-      };
-    }
-  }, []);
+    if (!isClient) return;
+
+    const initializeVimeoPlayers = () => {
+      const video1Container = videoRef.current;
+      const video2Container = secondVideoRef.current;
+
+      if (video1Container && !player1) {
+        const iframe1 = video1Container.querySelector('iframe');
+        if (iframe1) {
+          iframe1.addEventListener('load', handleVideoLoad);
+          setPlayer1(true);
+        }
+      }
+
+      if (video2Container && !player2) {
+        const iframe2 = video2Container.querySelector('iframe');
+        if (iframe2) {
+          setPlayer2(true);
+        }
+      }
+    };
+
+    // Delay initialization to ensure DOM is ready
+    setTimeout(initializeVimeoPlayers, 1000);
+
+    return () => {
+      const video1Container = videoRef.current;
+      if (video1Container) {
+        const iframe1 = video1Container.querySelector('iframe');
+        if (iframe1) {
+          iframe1.removeEventListener('load', handleVideoLoad);
+        }
+      }
+      setPlayer1(null);
+      setPlayer2(null);
+    };
+  }, [isClient]);
+
+  if (!isClient) {
+    return (
+      <div className="relative w-screen h-screen bg-black flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div
       ref={sectionRef}
       className="relative w-screen overflow-hidden"
-      style={{ height: '100vh' }}
+      style={{ height: "100vh" }} // Container height for smooth transition
     >
-      {/* SOLUTION 1: Enhanced iframe with better CSS */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* Custom CSS for fullscreen Vimeo videos */}
+      <style jsx>{`
+        .video-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+        
+        .video-container iframe {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100vw;
+          height: 56.25vw; /* 16:9 aspect ratio */
+          min-width: 177.77vh; /* 16:9 aspect ratio */
+          min-height: 100vh;
+          border: none;
+        }
+        
+        @media (max-aspect-ratio: 16/9) {
+          .video-container iframe {
+            width: 177.77vh;
+            height: 100vh;
+          }
+        }
+      `}</style>
+
+      {/* First Video Element - Main background video */}
+      <div className="video-container z-0">
         <iframe
           ref={videoRef}
-          className="absolute top-0 left-0 w-full h-full"
-          src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&quality=auto"
+          src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&responsive=1"
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: '100vw',
-            height: '56.25vw', // 16:9 aspect ratio
-            minHeight: '100vh',
-            minWidth: '177.78vh', // 16:9 aspect ratio
-            transform: 'translate(-50%, -50%)',
-            zIndex: 1,
-          }}
-          onLoad={handleVideoLoad}
         />
       </div>
 
-      <div className="absolute inset-0 w-full h-full">
+      {/* Second Video Element - Animates from bottom to top */}
+      <div className="video-container z-50">
         <iframe
           ref={secondVideoRef}
-          className="absolute top-0 left-0 w-full h-full"
-          src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&quality=auto"
+          src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&controls=0&responsive=1"
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: '100vw',
-            height: '56.25vw', // 16:9 aspect ratio
-            minHeight: '100vh',
-            minWidth: '177.78vh', // 16:9 aspect ratio
-            transform: 'translate(-50%, -50%)',
-            zIndex: 5,
-          }}
         />
       </div>
 
-      {/* Content overlay */}
-      <div 
+      {/* Content overlay - moves with video and centers in new position */}
+      <div
         ref={contentOverlayRef}
-        className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-4 pointer-events-none h-screen"
+        className="absolute inset-0 flex flex-col items-center justify-center text-center z-50 px-4 pointer-events-none h-screen"
       >
         <div className="w-full absolute inset-0 h-full"></div>
-        
+
         <img
           src="/logo.png"
           alt="Logo"
@@ -268,7 +343,7 @@ export default function HeroSection() {
             fontFamily: "'Almarai', sans-serif",
             fontWeight: 600,
             letterSpacing: "0.02em",
-            lineHeight: 1.2
+            lineHeight: 1.2,
           }}
         >
           Born from Emirati soil, our roots run deep
@@ -279,7 +354,7 @@ export default function HeroSection() {
             fontFamily: "'Almarai', sans-serif",
             fontWeight: 600,
             letterSpacing: "0.02em",
-            lineHeight: 1.2
+            lineHeight: 1.2,
           }}
         >
           and our vision soars high
@@ -290,7 +365,7 @@ export default function HeroSection() {
       <div className="hidden lg:block">
         <div className="h-screen relative">
           <div className="absolute inset-0 z-10">
-            <div className="sticky top-0 h-screen">
+            <div className="sticky top-10 h-screen">
               <svg
                 className="absolute inset-0 pointer-events-none"
                 width="100%"
@@ -309,7 +384,7 @@ export default function HeroSection() {
                     <text
                       ref={textRef}
                       x="0"
-                      y="60%"
+                      y="70%"
                       dominantBaseline="middle"
                       fontSize="54vw"
                       textAnchor="start"
@@ -342,119 +417,3 @@ export default function HeroSection() {
     </div>
   );
 }
-
-// SOLUTION 2: Alternative with React Player (requires npm install react-player)
-/*
-import ReactPlayer from 'react-player';
-
-const VideoPlayerAlternative = () => {
-  return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden">
-      <ReactPlayer
-        url="https://vimeo.com/1112468758"
-        playing={true}
-        loop={true}
-        muted={true}
-        controls={false}
-        width="100%"
-        height="100%"
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          minWidth: '100%',
-          minHeight: '100%',
-        }}
-        config={{
-          vimeo: {
-            playerOptions: {
-              background: true,
-              byline: false,
-              title: false,
-              portrait: false,
-            }
-          }
-        }}
-      />
-    </div>
-  );
-};
-*/
-
-// SOLUTION 3: Custom video with HTML5 video element
-/*
-const HTML5VideoPlayer = ({ videoSrc, ...props }) => {
-  return (
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      className="absolute inset-0 w-full h-full object-cover"
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        minWidth: '100%',
-        minHeight: '100%',
-        width: 'auto',
-        height: 'auto',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 1,
-      }}
-      {...props}
-    >
-      <source src={videoSrc} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  );
-};
-*/
-
-// SOLUTION 4: Plyr.js Integration (requires npm install plyr-react)
-/*
-import Plyr from 'plyr-react';
-import 'plyr-react/plyr.css';
-
-const PlyrVideoPlayer = ({ videoId }) => {
-  const videoSrc = {
-    type: 'video',
-    sources: [
-      {
-        src: videoId,
-        provider: 'vimeo',
-      },
-    ],
-  };
-
-  const plyrOptions = {
-    controls: [],
-    autoplay: true,
-    loop: { active: true },
-    muted: true,
-    clickToPlay: false,
-    hideControls: true,
-    fullscreen: { enabled: false },
-  };
-
-  return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden">
-      <div
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '100vw',
-          height: '56.25vw',
-          minHeight: '100vh',
-          minWidth: '177.78vh',
-        }}
-      >
-        <Plyr source={videoSrc} options={plyrOptions} />
-      </div>
-    </div>
-  );
-};
-*/
