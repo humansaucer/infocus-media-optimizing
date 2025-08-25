@@ -202,44 +202,55 @@ export default function HeroSection() {
     <div
       ref={sectionRef}
       className="relative w-screen overflow-hidden"
-      style={{ height: '100vh' }} // Container height for smooth transition
+      style={{ height: '100vh' }}
     >
-      {/* First Video Element - Main background video */}
-      <iframe
-        ref={videoRef}
-        className="absolute inset-0 z-0 w-screen h-screen object-cover"
-        src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
-        frameBorder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowFullScreen
-        style={{ 
-          minWidth: '100vw',
-          minHeight: '100vh',
-          maxWidth: '100vw',
-          maxHeight: '100vh',
-          border: 'none'
-        }}
-        onLoad={handleVideoLoad}
-      />
+      {/* SOLUTION 1: Enhanced iframe with better CSS */}
+      <div className="absolute inset-0 w-full h-full">
+        <iframe
+          ref={videoRef}
+          className="absolute top-0 left-0 w-full h-full"
+          src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&quality=auto"
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: '100vw',
+            height: '56.25vw', // 16:9 aspect ratio
+            minHeight: '100vh',
+            minWidth: '177.78vh', // 16:9 aspect ratio
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1,
+          }}
+          onLoad={handleVideoLoad}
+        />
+      </div>
 
-      {/* Second Video Element - Animates from bottom to top */}
-      <iframe
-        ref={secondVideoRef}
-        className="absolute inset-0 z-5 w-screen h-screen object-cover"
-        src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
-        frameBorder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowFullScreen
-        style={{ 
-          minWidth: '100vw',
-          minHeight: '100vh',
-          maxWidth: '100vw',
-          maxHeight: '100vh',
-          border: 'none'
-        }}
-      />
+      <div className="absolute inset-0 w-full h-full">
+        <iframe
+          ref={secondVideoRef}
+          className="absolute top-0 left-0 w-full h-full"
+          src="https://player.vimeo.com/video/1112468758?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1&quality=auto"
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: '100vw',
+            height: '56.25vw', // 16:9 aspect ratio
+            minHeight: '100vh',
+            minWidth: '177.78vh', // 16:9 aspect ratio
+            transform: 'translate(-50%, -50%)',
+            zIndex: 5,
+          }}
+        />
+      </div>
 
-      {/* Content overlay - moves with video and centers in new position */}
+      {/* Content overlay */}
       <div 
         ref={contentOverlayRef}
         className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-4 pointer-events-none h-screen"
@@ -331,3 +342,119 @@ export default function HeroSection() {
     </div>
   );
 }
+
+// SOLUTION 2: Alternative with React Player (requires npm install react-player)
+/*
+import ReactPlayer from 'react-player';
+
+const VideoPlayerAlternative = () => {
+  return (
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <ReactPlayer
+        url="https://vimeo.com/1112468758"
+        playing={true}
+        loop={true}
+        muted={true}
+        controls={false}
+        width="100%"
+        height="100%"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          minWidth: '100%',
+          minHeight: '100%',
+        }}
+        config={{
+          vimeo: {
+            playerOptions: {
+              background: true,
+              byline: false,
+              title: false,
+              portrait: false,
+            }
+          }
+        }}
+      />
+    </div>
+  );
+};
+*/
+
+// SOLUTION 3: Custom video with HTML5 video element
+/*
+const HTML5VideoPlayer = ({ videoSrc, ...props }) => {
+  return (
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      className="absolute inset-0 w-full h-full object-cover"
+      style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        minWidth: '100%',
+        minHeight: '100%',
+        width: 'auto',
+        height: 'auto',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 1,
+      }}
+      {...props}
+    >
+      <source src={videoSrc} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  );
+};
+*/
+
+// SOLUTION 4: Plyr.js Integration (requires npm install plyr-react)
+/*
+import Plyr from 'plyr-react';
+import 'plyr-react/plyr.css';
+
+const PlyrVideoPlayer = ({ videoId }) => {
+  const videoSrc = {
+    type: 'video',
+    sources: [
+      {
+        src: videoId,
+        provider: 'vimeo',
+      },
+    ],
+  };
+
+  const plyrOptions = {
+    controls: [],
+    autoplay: true,
+    loop: { active: true },
+    muted: true,
+    clickToPlay: false,
+    hideControls: true,
+    fullscreen: { enabled: false },
+  };
+
+  return (
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '100vw',
+          height: '56.25vw',
+          minHeight: '100vh',
+          minWidth: '177.78vh',
+        }}
+      >
+        <Plyr source={videoSrc} options={plyrOptions} />
+      </div>
+    </div>
+  );
+};
+*/
